@@ -92,7 +92,6 @@ public class Snake
 		return color;
 	}
 	
-	//BREAKS ENCAPSULATION -- REFACTOR
 	public Head getHead()
 	{
 		return head;

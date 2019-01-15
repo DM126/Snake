@@ -12,7 +12,6 @@ import java.awt.event.*;
  */
 public class HiscoresPanel extends JPanel
 {
-	private JLabel[] scores;
 	private SnakeFrame parent;
 	private Hiscores hiscores;
 	
@@ -21,32 +20,13 @@ public class HiscoresPanel extends JPanel
 		this.parent = parent;
 		this.hiscores = hiscores;
 		
-		JLabel title = new JLabel("High Scores");
-		title.setFont(new Font("Arial", Font.BOLD, 64));
-		title.setForeground(Color.WHITE);
+		
+		JLabel title = LabelFactory.createLabel("High Scores", new Font("Arial", Font.BOLD, 64), Color.WHITE);
 		add(title);
 		
-		//TODO: REFACTOR
-		scores = new JLabel[hiscores.getScores().length];
-		Font scoreFont = new Font("Arial", Font.PLAIN, 24);
-		for (int i = 0; i < scores.length; i++)
-		{
-			if (hiscores.getScores()[i] == 0)
-			{
-				scores[i] = new JLabel((i+1) + "                            ---");
-			}
-			else
-			{
-				scores[i] = new JLabel((i+1) + "                            " + hiscores.getScores()[i]);
-			}
-			scores[i].setFont(scoreFont);
-			scores[i].setForeground(Color.WHITE);
-			add(scores[i]);
-		}
+		writeScores();
 		
-		JLabel esc = new JLabel("Press Escape To Return To Menu");
-		esc.setFont(new Font("Arial", Font.ITALIC, 16));
-		esc.setForeground(Color.WHITE);
+		JLabel esc = LabelFactory.createLabel("Press Escape To Return To Menu", new Font("Arial", Font.ITALIC, 16), Color.WHITE);
 		add(esc);
 		
 		addKeyListener(new EscListener());
@@ -54,6 +34,30 @@ public class HiscoresPanel extends JPanel
 		setPreferredSize(new Dimension(400, 480));
 		setBackground(Color.BLACK);
 		setFocusable(true);
+	}
+	
+	/**
+	 * Displays the scores on screen.
+	 */
+	private void writeScores()
+	{
+		JLabel[] scores = new JLabel[hiscores.getScores().length];
+		Font scoreFont = new Font("Arial", Font.PLAIN, 24);
+		for (int i = 0; i < scores.length; i++)
+		{
+			int score = hiscores.getScores()[i];
+			String text = (i+1) + "                            ";
+			if (score != 0)
+			{
+				text += score;
+			}
+			else
+			{
+				text += "---";
+			}
+			scores[i] = LabelFactory.createLabel(text, scoreFont, Color.WHITE);
+			add(scores[i]);
+		}
 	}
 	
 	private class EscListener implements KeyListener

@@ -8,28 +8,23 @@ public class MainMenu extends JPanel
 	private JLabel game, scores, exit;
 	private JLabel[] selections;
 	private SnakeFrame parent;
-	private int selected; //the selected option. (0 to the number of labels in the array)
+	private int currentSelection; //the selected option. (0 to the number of labels in the array)
+	
+	private static final Color UNSELECTED = Color.WHITE;
+	private static final Color SELECTED = Color.GREEN;
 	
 	public MainMenu(SnakeFrame parent)
 	{
 		this.parent = parent;
 		
-		selected = 0;
+		currentSelection = 0;
 		
-		title = new JLabel("Snake");
-		title.setFont(new Font("Arial", Font.BOLD, 64));
-		title.setForeground(Color.WHITE);
+		title = LabelFactory.createLabel("Snake", new Font("Arial", Font.BOLD, 64), UNSELECTED);
 		
 		Font selectionFont = new Font("Arial", Font.PLAIN, 32);
-		game = new JLabel("Play Snake");
-		game.setForeground(Color.GREEN);
-		game.setFont(selectionFont);
-		scores = new JLabel("High Scores");
-		scores.setForeground(Color.WHITE);
-		scores.setFont(selectionFont);
-		exit = new JLabel("Exit");
-		exit.setForeground(Color.WHITE);
-		exit.setFont(selectionFont);
+		game = LabelFactory.createLabel("Play Snake", selectionFont, SELECTED);
+		scores = LabelFactory.createLabel("High Scores", selectionFont, UNSELECTED);
+		exit = LabelFactory.createLabel("Exit", selectionFont, UNSELECTED);
 		
 		selections = new JLabel[] { game, scores, exit };
 		
@@ -51,8 +46,8 @@ public class MainMenu extends JPanel
 	{
 		super.paintComponent(page);
 		
-		JLabel current = selections[selected];
-		page.setColor(Color.GREEN);
+		JLabel current = selections[currentSelection];
+		page.setColor(SELECTED);
 		page.fillOval(current.getX() - 20, current.getY() + 10, 15, 15);
 	}
 	
@@ -76,11 +71,12 @@ public class MainMenu extends JPanel
 	 */
 	private void changeSelection(int move)
 	{
-		if (selected + move >= 0 && selected + move < selections.length)
+		int newSelection = currentSelection + move;
+		if (newSelection >= 0 && newSelection < selections.length)
 		{
-			selections[selected].setForeground(Color.WHITE);
-			selected += move;
-			selections[selected].setForeground(Color.GREEN);
+			selections[currentSelection].setForeground(UNSELECTED);
+			currentSelection = newSelection;
+			selections[currentSelection].setForeground(SELECTED);
 			repaint();
 		}
 	}
@@ -91,11 +87,11 @@ public class MainMenu extends JPanel
 		{
 			if (event.getKeyCode() == KeyEvent.VK_ENTER || event.getKeyCode() == KeyEvent.VK_SPACE)
 			{
-				JLabel current = selections[selected];
+				JLabel current = selections[currentSelection];
 				
 				if (current == game)
 				{
-					parent.startGameOriginal();
+					parent.startGame();
 				}
 				else if (current == scores)
 				{

@@ -82,7 +82,7 @@ public class SnakeFrame extends JFrame
 		changePanels(menu);
 	}
 	
-	public void startGameOriginal()
+	public void startGame()
 	{
 		changePanels(new SnakePanel(this, hiscores));
 	}

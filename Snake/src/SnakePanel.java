@@ -18,18 +18,17 @@ public class SnakePanel extends JPanel
 	private Hiscores hiscores;
 	private SnakeFrame parent;
 	private boolean gameOver;
-	//private JLabel newBestScore;
+	
+	private final Font CENTER_FONT;
 	
 	public SnakePanel(SnakeFrame parent, Hiscores hiscores)
 	{
+		CENTER_FONT = new Font("Arial", Font.PLAIN, 32);
+		
 		this.parent = parent;
 		this.hiscores = hiscores;
 		
 		gameOver = false;
-		//newBestScore = new JLabel("New Best Score!");
-		//newBestScore.setForeground(Color.WHITE);
-		//newBestScore.setVisible(false);
-		//add(newBestScore);
 		
 		goal = new Goal();
 		snake = new Snake(WIDTH / TILE_SIZE / 2, HEIGHT / TILE_SIZE / 2);
@@ -50,7 +49,10 @@ public class SnakePanel extends JPanel
 		
 		//goal
 		page.setColor(goal.getColor());
-		page.fillOval(goal.getX() * TILE_SIZE, goal.getY() * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+		page.fillOval(goal.getX() * TILE_SIZE, 
+						goal.getY() * TILE_SIZE,
+						TILE_SIZE,
+						TILE_SIZE);
 		
 		//snake
 		page.setColor(snake.getColor());
@@ -115,16 +117,15 @@ public class SnakePanel extends JPanel
 	 * @param message the text to display
 	 * @param g the graphics to draw on
 	 */
-	private void displayCenterredText(String message, Graphics g)
+	private void displayCenteredText(String message, Graphics g)
 	{
-		Font font = new Font("Arial", Font.PLAIN, 32);
-		g.setFont(font);
+		g.setFont(CENTER_FONT);
 
-		int stringLen = (int) g.getFontMetrics().getStringBounds(message, g).getWidth();
-		int start = (WIDTH * TILE_SIZE)/2 - stringLen/2;
+		int stringLength = (int) g.getFontMetrics().getStringBounds(message, g).getWidth();
+		int x = ((WIDTH * TILE_SIZE) - stringLength) / 2;
 	    
 		g.setColor(Color.WHITE);
-		g.drawString(message, start, HEIGHT * TILE_SIZE / 2);
+		g.drawString(message, x, HEIGHT * TILE_SIZE / 2);
 	}
 	
 	/**
@@ -133,9 +134,11 @@ public class SnakePanel extends JPanel
 	public void restart()
 	{
 		gameOver = false;
-		//newBestScore.setVisible(false);
 		goal.setNewPosition();
+		
+		//Create a new snake at the center of the screen.
 		snake = new Snake(WIDTH / TILE_SIZE / 2, HEIGHT / TILE_SIZE / 2);
+		
 		timer.restart();
 		repaint();
 	}
@@ -148,15 +151,14 @@ public class SnakePanel extends JPanel
 		if (timer.isRunning())
 		{
 			timer.stop();
+			Graphics g = this.getGraphics();
+			g.fillRect(0, 0, WIDTH * TILE_SIZE, HEIGHT * TILE_SIZE);
+			displayCenteredText("PAUSED", g);
 		}
 		else
 		{
 			timer.start();
 		}
-		
-		Graphics g = this.getGraphics();
-		g.fillRect(0, 0, WIDTH * TILE_SIZE, HEIGHT * TILE_SIZE);
-		displayCenterredText("PAUSED", g);
 	}
 	
 	private class SnakeListener implements ActionListener, KeyListener 
@@ -227,10 +229,6 @@ public class SnakePanel extends JPanel
 			{
 				goal.setNewPosition();
 				snake.addSegment();
-				//if (snake.getLength() - 1 > hiscores.getTopScore())
-				//{
-				//		newBestScore.setVisible(true);
-				//}
 				repaint();
 			}
 			else if (hasCollision())
