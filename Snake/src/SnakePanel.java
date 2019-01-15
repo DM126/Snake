@@ -58,7 +58,10 @@ public class SnakePanel extends JPanel
 		page.setColor(snake.getColor());
 		for (int i = 0; i < snake.getLength(); i++) 
 		{
-			page.fillRect(snake.get(i).getX() * TILE_SIZE + 1, snake.get(i).getY() * TILE_SIZE + 1, TILE_SIZE - 2, TILE_SIZE - 2);
+			page.fillRect(snake.get(i).getX() * TILE_SIZE + 1, 
+							snake.get(i).getY() * TILE_SIZE + 1,
+							TILE_SIZE - 2, 
+							TILE_SIZE - 2);
 		}
 		
 		//score
@@ -106,7 +109,7 @@ public class SnakePanel extends JPanel
 		gameOver = true;
 		timer.stop();
 		
-		displayCenterredText("GAME OVER", getGraphics());
+		displayCenteredText("GAME OVER", getGraphics());
 		
 		hiscores.addScore(snake.getLength() - 1);
 	}
