@@ -21,8 +21,8 @@ public class Goal
 	
 	public void setNewPosition() 
 	{
-		x = rand.nextInt(25);
-		y = rand.nextInt(25);
+		x = rand.nextInt(SnakePanel.width());
+		y = rand.nextInt(SnakePanel.height());
 	}
 	
 	public int getX() 

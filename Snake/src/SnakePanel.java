@@ -9,9 +9,9 @@ import javax.swing.*;
 
 public class SnakePanel extends JPanel
 {
-	private final int TILE_SIZE = 15; //pixels per tile
-	private final int WIDTH = 32; //number of tiles wide
-	private final int HEIGHT = 32; //number of tiles high
+	private static final int TILE_SIZE = 15; //pixels per tile
+	private static final int WIDTH = 32; //number of tiles wide
+	private static final int HEIGHT = 32; //number of tiles high
 	private Goal goal;
 	private Snake snake;
 	private Timer timer;
@@ -162,6 +162,16 @@ public class SnakePanel extends JPanel
 		{
 			timer.start();
 		}
+	}
+	
+	public static int width()
+	{
+		return WIDTH;
+	}
+	
+	public static int height()
+	{
+		return HEIGHT;
 	}
 	
 	private class SnakeListener implements ActionListener, KeyListener 
