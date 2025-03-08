@@ -20,7 +20,7 @@ public class SnakeFrame extends JFrame
 		
 		try
 		{
-			hiscores = new Hiscores("Hiscores.txt");
+			hiscores = new Hiscores("Snake/resources/Hiscores.txt");
 		}
 		catch (FileNotFoundException ex)
 		{
