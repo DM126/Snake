@@ -1,10 +1,13 @@
 
 public abstract class Segment 
 {
-	protected int x, y; //location coordinates
+	//location coordinates
+	protected int x;
+	protected int y;
+	
 	protected Body next;
 	
-	public Segment(int x, int y) 
+	protected Segment(int x, int y) 
 	{
 		setPosition(x, y);
 		next = null;

@@ -6,12 +6,13 @@ public class SnakeFrame extends JFrame
 {
 	private MainMenu menu;
 	private Hiscores hiscores;
+	public static final String FONT_NAME = "Arial";
 	
 	public SnakeFrame()
 	{
 		super("Snake");
 
-		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		WindowCloser closer = new WindowCloser();
 		addWindowListener(closer);
 		

@@ -12,21 +12,21 @@ import java.awt.event.*;
  */
 public class HiscoresPanel extends JPanel
 {
-	private SnakeFrame parent;
+	private SnakeFrame parentFrame;
 	private Hiscores hiscores;
 	
 	public HiscoresPanel(SnakeFrame parent, Hiscores hiscores)
 	{
-		this.parent = parent;
+		this.parentFrame = parent;
 		this.hiscores = hiscores;
 		
 		
-		JLabel title = LabelFactory.createLabel("High Scores", new Font("Arial", Font.BOLD, 64), Color.WHITE);
+		JLabel title = LabelFactory.createLabel("High Scores", new Font(SnakeFrame.FONT_NAME, Font.BOLD, 64), Color.WHITE);
 		add(title);
 		
 		writeScores();
 		
-		JLabel esc = LabelFactory.createLabel("Press Escape To Return To Menu", new Font("Arial", Font.ITALIC, 16), Color.WHITE);
+		JLabel esc = LabelFactory.createLabel("Press Escape To Return To Menu", new Font(SnakeFrame.FONT_NAME, Font.ITALIC, 16), Color.WHITE);
 		add(esc);
 		
 		addKeyListener(new EscListener());
@@ -42,7 +42,7 @@ public class HiscoresPanel extends JPanel
 	private void writeScores()
 	{
 		JLabel[] scores = new JLabel[hiscores.getScores().length];
-		Font scoreFont = new Font("Arial", Font.PLAIN, 24);
+		Font scoreFont = new Font(SnakeFrame.FONT_NAME, Font.PLAIN, 24);
 		for (int i = 0; i < scores.length; i++)
 		{
 			int score = hiscores.getScores()[i];
@@ -66,7 +66,7 @@ public class HiscoresPanel extends JPanel
 		{
 			if (event.getKeyCode() == KeyEvent.VK_ESCAPE)
 			{
-				parent.returnToMenu();
+				parentFrame.returnToMenu();
 			}
 		}
 

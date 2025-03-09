@@ -5,9 +5,11 @@ import javax.swing.*;
 public class MainMenu extends JPanel
 {
 	private JLabel title;
-	private JLabel game, scores, exit;
+	private JLabel game;
+	private JLabel scores;
+	private JLabel exit;
 	private JLabel[] selections;
-	private SnakeFrame parent;
+	private SnakeFrame parentFrame;
 	private int currentSelection; //the selected option. (0 to the number of labels in the array)
 	
 	private static final Color UNSELECTED = Color.WHITE;
@@ -15,13 +17,13 @@ public class MainMenu extends JPanel
 	
 	public MainMenu(SnakeFrame parent)
 	{
-		this.parent = parent;
+		this.parentFrame = parent;
 		
 		currentSelection = 0;
 		
-		title = LabelFactory.createLabel("Snake", new Font("Arial", Font.BOLD, 64), UNSELECTED);
+		title = LabelFactory.createLabel("Snake", new Font(SnakeFrame.FONT_NAME, Font.BOLD, 64), UNSELECTED);
 		
-		Font selectionFont = new Font("Arial", Font.PLAIN, 32);
+		Font selectionFont = new Font(SnakeFrame.FONT_NAME, Font.PLAIN, 32);
 		game = LabelFactory.createLabel("Play Snake", selectionFont, SELECTED);
 		scores = LabelFactory.createLabel("High Scores", selectionFont, UNSELECTED);
 		exit = LabelFactory.createLabel("Exit", selectionFont, UNSELECTED);
@@ -42,6 +44,7 @@ public class MainMenu extends JPanel
 		repaint();
 	}
 	
+	@Override
 	public void paintComponent(Graphics page)
 	{
 		super.paintComponent(page);
@@ -60,7 +63,7 @@ public class MainMenu extends JPanel
 		
 		if (choice == JOptionPane.YES_OPTION)
 		{
-			parent.close();
+			parentFrame.close();
 		}
 	}
 	
@@ -91,11 +94,11 @@ public class MainMenu extends JPanel
 				
 				if (current == game)
 				{
-					parent.startGame();
+					parentFrame.startGame();
 				}
 				else if (current == scores)
 				{
-					parent.hiscores();
+					parentFrame.hiscores();
 				}
 				else if (current == exit)
 				{

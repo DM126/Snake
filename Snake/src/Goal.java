@@ -10,7 +10,7 @@ public class Goal
 	private int x;
 	private int y;
 	private Random rand;
-	private final Color color = Color.RED;
+	private static final Color color = Color.RED;
 	
 	public Goal() 
 	{

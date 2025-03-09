@@ -19,12 +19,10 @@ public class SnakePanel extends JPanel
 	private SnakeFrame parent;
 	private boolean gameOver;
 	
-	private final Font CENTER_FONT;
+	private static final Font CENTER_FONT = new Font(SnakeFrame.FONT_NAME, Font.PLAIN, 32);
 	
 	public SnakePanel(SnakeFrame parent, Hiscores hiscores)
 	{
-		CENTER_FONT = new Font("Arial", Font.PLAIN, 32);
-		
 		this.parent = parent;
 		this.hiscores = hiscores;
 		
@@ -43,6 +41,7 @@ public class SnakePanel extends JPanel
 		timer.start();
 	}
 	
+	@Override
 	public void paintComponent(Graphics page) 
 	{
 		super.paintComponent(page);
@@ -86,18 +85,11 @@ public class SnakePanel extends JPanel
 	 */
 	public boolean hasCollision()
 	{
-		if (snake.getHeadX() < 0 || snake.getHeadX() >= WIDTH || snake.getHeadY() < 0 || snake.getHeadY() >= HEIGHT)
-		{
-			return true;
-		}
-		else if (snake.hitsBody())
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		return snake.getHeadX() < 0 
+			|| snake.getHeadX() >= WIDTH 
+			|| snake.getHeadY() < 0 
+			|| snake.getHeadY() >= HEIGHT
+			|| snake.hitsBody();
 	}
 	
 	/**

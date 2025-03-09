@@ -5,7 +5,9 @@
  */
 public class Head extends Segment
 {
-	private int mx, my; //directional movement
+	//directional movement
+	private int mx;
+	private int my;
 	
 	public Head(int x, int y) 
 	{

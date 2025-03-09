@@ -106,13 +106,13 @@ public class Hiscores
 	 */
 	public String toString()
 	{
-		String results = "";
+		StringBuilder results = new StringBuilder();
 		
 		for (int s : scores)
 		{
-			results += (s + "\n");
+			results.append(s + "\n");
 		}
 		
-		return results;
+		return results.toString();
 	}
 }

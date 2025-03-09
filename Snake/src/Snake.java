@@ -5,11 +5,11 @@ public class Snake
 {
 	private LinkedList<Segment> segments;
 	private Head head;
-	private final Color color = Color.GREEN;
+	private static final Color COLOR = Color.GREEN;
 	
 	public Snake(int x, int y)
 	{
-		segments = new LinkedList<Segment>();
+		segments = new LinkedList<>();
 		head = new Head(x, y);
 		segments.add(head);
 	}
@@ -89,7 +89,7 @@ public class Snake
 	
 	public Color getColor()
 	{
-		return color;
+		return COLOR;
 	}
 	
 	public Head getHead()
